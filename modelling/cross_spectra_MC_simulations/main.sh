@@ -1,0 +1,1 @@
+sbatch run_MC_cross_spectra.sh
