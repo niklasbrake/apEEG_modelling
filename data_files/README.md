@@ -1,4 +1,4 @@
-To generate the manuscript figures, the following results and other data files need to be downloaded from the link and placed in this folder.
+To generate the manuscript figures, the following results and other data files need to be <a href="https://drive.google.com/uc?export=download&id=1Ek9COzFk_wjMBEZs1V88iNplqI2bCBFh">download from this link</a> and placed in this folder. Below is a description of the data files that are available for download.
 
 **AP_scaling.mat** is a file that contains the output of the function compute_scaling_with_firing_frequency.m. It contains the following variables:
 B2 : 10 x 68 double
