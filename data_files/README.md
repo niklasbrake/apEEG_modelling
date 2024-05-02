@@ -27,14 +27,12 @@ psd_Yhat : 4096 x 680 double
 
     Modelled power spectra based on the unitary AP response of each neuron
 
-
-
+---
 **EI_ratio.mat** contains the simulations results for 68 neuron models simulated at each of 10 EI ratios. It contains a structure for every
 
 neuron model. To reduce file size, only a minimal set of simulation results (5 models) are included to reproduce analysis.
 
-
-
+---
 **MC_results.mat** contains the results of the Monte Carlo simulations of the cross spectrum among unitary apEEG signals. It contains the following variables
 
 dValues : 1 x 1000 double
@@ -53,20 +51,17 @@ SSExy_D : 8000 x 1000 double
 
     sum of squared errors for each spectrum across the samples
 
-
-
+---
 **anatomy_nyhead_model.mat** is the data from the New York head model, and can also be downloaded from https://www.parralab.org/nyhead/sa_nyhead.mat
 
-
-
+---
 **asymmetry_indices.mat** is the output of the function calculate_dendrite_asymmetry.m. Contains the variables
 
 asym_idx : 1035 x 1 double
 
     the asymmetry index for each of the 1035 neuron model morphologies
 
-
-
+---
 **mtype_abundance.mat** contains the abundance data for each neuron class. Contains,
 
 mTypePDF : 1035 x 1 double
@@ -81,8 +76,7 @@ mtype_abundance : table
 
     contains rows for each neuron class, its relative abundance, and the count of the number of neuron models of each class
 
-
-
+---
 **pairwise_distance.mat** is the output of the function compute_cortical_area. Contains the following variables,
 
 rValues : 1 x 100 double
@@ -97,8 +91,7 @@ total_area : 100 x 5000
 
     the total surface area of the cortex enclosed for each ball radius (x100) and each ball origin (x5000)
 
-
-
+---
 **unitaryAP.mat** contains the output of the function compute_uAP. Contains the following variables:
 
 savedUnitaryAP : 8001 x 3 x 1035 double
@@ -113,8 +106,7 @@ ei_type : 1 x 1035 logical
 
     the EI type of each neuron. 0 is inhibitory and 1 is excitatory
 
-
-
+---
 **unitarySpectrum.mat** is the output of the function compute_uAP_spectrum. Contains the following variables:
 
 psd : 4000 x 1035 double
