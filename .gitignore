@@ -1,5 +1,3 @@
-*.asc linguist-detectable=false
-
 # Ignore data files, which can be downloaded from external link
 data_files/AP_scaling.mat
 data_files/EI_ratio.mat
