@@ -3,7 +3,7 @@ This repository contains four folders: **figures**, **modelling**, **auxiliary_f
 
 **figures** contains MATLAB code to reproduce all the figures of the manuscript. See Installation guide and Instructions for use below.
 
-**modelling** contains several analysis functions that are called by the figure generation scripts. Additionally, this folder contains subdirectories that run the simulation. The results of the simulations are provided as data files (see below). For information, read the data file README.
+**modelling** contains several analysis functions that are called by the figure generation scripts. Additionally, this folder contains subdirectories for simulating the model. The results of the simulations are provided as data files (see below). For information, read the data file README.
 
 **auxiliary_functions** contains auxiliary MATLAB function unrelated to the modelling work.
 
