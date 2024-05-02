@@ -1,0 +1,1 @@
+Directory containing the Blue Brain project neuron models. Only two are included in the repository as examples. The rest can be downloaded from the Blue Brain project: https://bbp.epfl.ch/nmc-portal/assets/documents/static/Download/hoc_combos_syn.1_0_10.allzips.tar
