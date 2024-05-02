@@ -1,3 +1,14 @@
+# Ignore data files, which can be downloaded from external link
+data_files/AP_scaling.mat
+data_files/EI_ratio.mat
+data_files/MC_results.mat
+data_files/anatomy_nyhead_model.mat
+data_files/asymmetry_indices.mat
+data_files/mtype_abundance.mat
+data_files/neuron_models
+data_files/pairwise_distance.mat
+data_files/unitaryAP.mat
+data_files/unitarySpectrum.mat
 
 # Ignore all the neuron model except two examples
 # Can be downloaded from https://bbp.epfl.ch/nmc-portal/assets/documents/static/Download/hoc_combos_syn.1_0_10.allzips.tar
