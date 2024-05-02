@@ -1,5 +1,5 @@
 ## Overview
-This repository contains four folders: **figures**, **modelling*, **auxiliary_functions**, and **data_files**.
+This repository contains four folders: **figures**, **modelling**, **auxiliary_functions**, and **data_files**.
 
 **figures** contains MATLAB code to reproduce all the figures of the manuscript. See Installation guide and Instructions for use below.
 
