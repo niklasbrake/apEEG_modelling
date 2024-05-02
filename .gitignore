@@ -10,8 +10,8 @@ data_files/pairwise_distance.mat
 data_files/unitaryAP.mat
 data_files/unitarySpectrum.mat
 
-# Ignore all the neuron model except two examples
-# Can be downloaded from https://bbp.epfl.ch/nmc-portal/assets/documents/static/Download/hoc_combos_syn.1_0_10.allzips.tar
+# Ignore all the neuron model except two examples: L4_BP_cACint209_1 and L6_BPC_cADpyr231_3.
+# All other models can be downloaded from https://bbp.epfl.ch/nmc-portal/assets/documents/static/Download/hoc_combos_syn.1_0_10.allzips.tar
 data_files/neuron_models/L1_DAC_bNAC219_1/
 data_files/neuron_models/L1_DAC_bNAC219_2/
 data_files/neuron_models/L1_DAC_bNAC219_3/
@@ -312,7 +312,6 @@ data_files/neuron_models/L4_BP_bNAC219_2/
 data_files/neuron_models/L4_BP_bNAC219_3/
 data_files/neuron_models/L4_BP_bNAC219_4/
 data_files/neuron_models/L4_BP_bNAC219_5/
-data_files/neuron_models/L4_BP_cACint209_1/
 data_files/neuron_models/L4_BP_cACint209_2/
 data_files/neuron_models/L4_BP_cACint209_3/
 data_files/neuron_models/L4_BP_cACint209_4/
@@ -789,7 +788,6 @@ data_files/neuron_models/L5_UTPC_cADpyr232_4/
 data_files/neuron_models/L5_UTPC_cADpyr232_5/
 data_files/neuron_models/L6_BPC_cADpyr231_1/
 data_files/neuron_models/L6_BPC_cADpyr231_2/
-data_files/neuron_models/L6_BPC_cADpyr231_3/
 data_files/neuron_models/L6_BPC_cADpyr231_4/
 data_files/neuron_models/L6_BPC_cADpyr231_5/
 data_files/neuron_models/L6_BP_bAC217_1/
