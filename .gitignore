@@ -5,7 +5,6 @@ data_files/MC_results.mat
 data_files/anatomy_nyhead_model.mat
 data_files/asymmetry_indices.mat
 data_files/mtype_abundance.mat
-data_files/neuron_models
 data_files/pairwise_distance.mat
 data_files/unitaryAP.mat
 data_files/unitarySpectrum.mat
