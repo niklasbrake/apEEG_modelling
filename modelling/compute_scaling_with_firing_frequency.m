@@ -34,7 +34,6 @@ function [f0,psd_Y,psd_Yhat,R,B2] = compute_scaling_with_firing_frequency
     psd_Yhat = zeros(4096,length(EI_vec)*M);
 
     fs = 16e3; % Hz
-    h = waitbar(0);
     for ii = 1:M
         meanAP = getUAP(cellIDs{ii});
         cell = matObj.(cellIDs{ii});
@@ -77,7 +76,6 @@ function [f0,psd_Y,psd_Yhat,R,B2] = compute_scaling_with_firing_frequency
             R(k,ii) = 1 - sum((Y-Yhat).^2)./sum((Y-mean(Y)).^2);
         end
     end
-    delete(h)
 end
 function output = neglnlike(B1,X0,X1,y)
     model = X0 + B1*X1;

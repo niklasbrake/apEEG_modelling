@@ -15,7 +15,7 @@ psd_Yhat : 4096 x 680 double
     Modelled power spectra based on the unitary AP response of each neuron
 
 **EI_ratio.mat** contains the simulations results for 68 neuron models simulated at each of 10 EI ratios. It contains a structure for every
-neuron model.
+neuron model. To reduce file size, only a minimal set of simulation results (5 models) are included to reproduce analysis.
 
 **MC_results.mat** contains the results of the Monte Carlo simulations of the cross spectrum among unitary apEEG signals. It contains the following variables
 dValues : 1 x 1000 double
