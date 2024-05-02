@@ -1,5 +1,4 @@
-The results needed to reproduce the figures in the manuscript are available for download from provided link in the main README. The following
-files are required
+To generate the manuscript figures, the following results and other data files need to be downloaded from the link and placed in this folder.
 
 **AP_scaling.mat** is a file that contains the output of the function compute_scaling_with_firing_frequency.m. It contains the following variables:
 B2 : 10 x 68 double
