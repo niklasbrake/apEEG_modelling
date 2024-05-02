@@ -4,10 +4,9 @@ function figure5
 
     baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
-    addpath(fullfile(baseFolder,'data_analysis'));
-    addpath(fullfile(baseFolder,'modelling','MC simulations'));
+    addpath(fullfile(baseFolder,'modelling'));
 
-    [f,Rxx,Rxy,Rxy_CI] = compute_AP_spectra;
+    [f,Rxx,Rxy] = compute_AP_spectra;
     N2 = 16e9; % Total number of neurons
 
     [f0,S] = import_paralytic_data;

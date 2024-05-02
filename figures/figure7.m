@@ -4,8 +4,7 @@ function figure7
 
     baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
-    addpath(fullfile(baseFolder,'data_analysis'));
-    addpath(fullfile(baseFolder,'modelling','MC simulations'));
+    addpath(fullfile(baseFolder,'modelling'));
 
 
     [f,Rxx,Rxy] = compute_AP_spectra;

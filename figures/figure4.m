@@ -4,8 +4,7 @@ function figure4
 
     baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
-    addpath(fullfile(baseFolder,'data_analysis'));
-    addpath(fullfile(baseFolder,'modelling','MC_simulations'));
+    addpath(fullfile(baseFolder,'modelling'));
 
     plot_cortex_schematic;
     plot_example_jitter;

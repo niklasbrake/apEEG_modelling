@@ -8,7 +8,7 @@ function figure3
 
     baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
-    addpath(fullfile(baseFolder,'data_analysis'));
+    addpath(fullfile(baseFolder,'modelling'));
 
     load(fullfile(baseFolder,'data_files','mtype_abundance.mat'),'mtype_abundance');
     load(fullfile(baseFolder,'data_files','unitaryAP.mat'),'mtype','ei_type');

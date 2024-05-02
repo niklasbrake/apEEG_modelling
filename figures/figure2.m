@@ -11,7 +11,7 @@ function figure2
 
     load(fullfile(baseFolder,'data_files','AP_scaling.mat'));
 
-    A = regress(R(:),[firingFrequency(:),ones(size(firingFrequency(:)))])
+    A = regress(R(:),[firingFrequency(:),ones(size(firingFrequency(:)))]);
     t = linspace(0.1,100,20);
 
     figureNB(9,4.4);
@@ -39,7 +39,7 @@ function figure2
         xticklabels([0.1,1,10,100])
     gcaformat(gcf,true,8);
 
-    edges = [0,20,40,80,Inf]
+    edges = [0,20,40,80,Inf];
     bins = discretize(firingFrequency(:),edges);
     split_Y = splitapply(@(x)mean(x,2),psd_Y,bins');
     split_Yhat = splitapply(@(x)mean(x,2),psd_Yhat,bins');

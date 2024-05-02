@@ -4,8 +4,7 @@ function figureS1
 
     baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
-    addpath(fullfile(baseFolder,'modelling','unitary_AP_response','analysis'));
-    addpath(fullfile(baseFolder,'modelling','MC_simulations'));
+    addpath(fullfile(baseFolder,'modelling'));
 
     [t,R] = compute_uAP_xcorr;
 

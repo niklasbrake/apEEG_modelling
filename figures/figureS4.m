@@ -3,6 +3,7 @@ function figureS4
 % See also compute_AP_spectra, import_Scheer2006
     baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
+    addpath(fullfile(baseFolder,'modelling'));
 
     % Run for sigma_x^2 = 1 mm^2
     main(1);

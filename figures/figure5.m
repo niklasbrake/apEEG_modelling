@@ -4,7 +4,7 @@ function figure5
 
     baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
-    addpath(fullfile(baseFolder,'data_analysis'));
+    addpath(fullfile(baseFolder,'modelling'));
 
 
     [full_model,AP_model] = fittingmodel('eq6');

@@ -3,7 +3,7 @@ function figureS5
 % See also compute_AP_spectra, import_paralytic_data
     baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
-    addpath(fullfile(baseFolder,'data_analysis'));
+    addpath(fullfile(baseFolder,'modelling'));
 
     % Run for sigma_t = 60 ms
     main(60e-3);

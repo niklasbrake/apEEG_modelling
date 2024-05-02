@@ -10,7 +10,7 @@ function [f,Sxx,Sxy] = compute_AP_spectra(sigx2)
 %
 % See also compute_cortical_area, modelling/unitary_AP_response/simulations/main.sh, and modelling/MC_simulations/main.sh.
 
-    baseFolder = fileparts(fileparts(fileparts(fileparts(mfilename('fullpath')))));
+    baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
     addpath(fullfile(baseFolder,'data_analysis'));
 

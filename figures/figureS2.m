@@ -9,37 +9,14 @@ function figureS2
 
     baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
-    addpath(fullfile(baseFolder,'data_analysis'));
+    addpath(fullfile(baseFolder,'modelling'));
 
     load(fullfile(baseFolder,'data_files','unitarySpectrum.mat'),'freq','psd','mtype');
 
     folder = fullfile(baseFolder,'data_files','neuron_models','L4_BP_cACint209_1','matlab_recordings');
-
-
     data1=load(fullfile(folder,'synaptic_input_EI30.mat'));
     data2=load(fullfile(folder,'synaptic_input_EI30_passive.mat'));
     [y,x] = findpeaks(data1.voltage,data1.time,'MinPeakHeight',0);
-
-
-    del = data1.dipoles(2:end,3,1)-data2.dipoles(2:end,3,1);
-
-    figureNB(13.2,10)
-    subplot(2,1,1);
-        plot(data1.time(2:end),data1.dipoles(2:end,3,1),'color','k')
-        hold on;
-        plot(data1.time(2:end),data2.dipoles(2:end,3,1),'color',red)
-        ylabel(['q_z (nA' char(956) 'm)'])
-        xlim([0,1e4]);
-        % ylim([-20,20])
-
-    subplot(2,1,2);
-        plot(data1.time(2:end),del,'k')
-        line([0,1e4],[0,0],'color',red)
-        ylim([-10,10])
-        xlim([0,1e4]);
-        ylabel(['q_z active - passive (nA' char(956) 'm)'])
-
-    gcaformat(gcf,true,8)
 
     [G,I] = findgroups(mtype);
 
@@ -87,7 +64,7 @@ function figureS2
         gcaformat(gca,true,8)
 
     axes('Position',[0.42, 0.10, 0.55, 0.19])
-        plot(data1.time(2:end),del,'k')
+        plot(data1.time(2:end),data1.dipoles(2:end,3,1)-data2.dipoles(2:end,3,1),'k')
         line([0,1e4],[0,0],'color',[0.6,0.6,0.6],'LineWidth',1)
         ylim([-0.5,0.5])
         xlim([0,1e4]);

@@ -4,7 +4,7 @@ function [tau,R] = compute_uAP_xcorr(n)
 %   neuron pairs. Default n=10000.
 %   R is an array with size 3 x 3 x n x length(tau).
 
-    baseFolder = fileparts(fileparts(fileparts(fileparts(mfilename('fullpath')))));
+    baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
 
     load(fullfile(baseFolder,'data_files','unitaryAP.mat'),'savedUnitaryAP');
@@ -15,6 +15,10 @@ function [tau,R] = compute_uAP_xcorr(n)
 
     lag = 160;
     T = 2*lag+1;
+
+    load(fullfile(baseFolder,'data_files','mtype_abundance.mat'),'mTypeCDF');
+    [~,idcs] = unique(mTypeCDF);
+    sample_blue_neurons = @(N) interp1(mTypeCDF(idcs),idcs,rand(N,1),'next','extrap');
 
     bs_sample = reshape(sample_blue_neurons(n*2),2,[]);
     R_xx = zeros(T,n); R_yx = zeros(T,n); R_zx = zeros(T,n);
