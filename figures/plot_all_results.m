@@ -79,8 +79,7 @@ end
 
 
 if(~fileCheck)
-    disp('Some or all data files are missing. These can be downloaded from the following link and moved to the data_files directory:')
-    disp('https://drive.google.com/uc?export=download&id=1Ek9COzFk_wjMBEZs1V88iNplqI2bCBFh')
+    error('Some or all data files are missing. These can be downloaded from the following link and moved to the data_files directory: https://drive.google.com/uc?export=download&id=1Ek9COzFk_wjMBEZs1V88iNplqI2bCBFh')
 else
     disp('All data files present. Proceeding to plot figures...')
 end
