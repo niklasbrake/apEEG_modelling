@@ -310,6 +310,10 @@ function plot_example_jitter(apResponses)
     s1 = s1+S*randn(m2,1);
     s2 = s2+S*randn(m2,1);
 
+    if(isempty(common))
+        error('By chance, the example spike trains have no overlapping spikes. Try running again.');
+    end
+
     % figureNB(8,6);
     axes('Position',[0.05,0.08,0.6,0.4]);
         R = raster([s1*0;s2*0+1],[s1;s2],gcf);

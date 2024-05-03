@@ -16,6 +16,8 @@ function figure3
     load(fullfile(baseFolder,'data_files','unitarySpectrum.mat'),'psd');
 
     [f,Sxx] = compute_AP_spectra;
+    f = f(2:2:end); Sxx = Sxx(2:2:end); % Frequncy resolution is upsampled to match Sxy by default
+
     [f0,S] = import_Scheer2006;
     low_noise = (8e-3).^2;
     N2 = 16e9;

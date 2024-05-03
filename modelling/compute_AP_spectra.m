@@ -12,7 +12,6 @@ function [f,Sxx,Sxy] = compute_AP_spectra(sigx2)
 
     baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
-    addpath(fullfile(baseFolder,'data_analysis'));
 
     if(nargin<1)
         sigx2 = 3;
@@ -25,8 +24,8 @@ function [f,Sxx,Sxy] = compute_AP_spectra(sigx2)
     load(fullfile(baseFolder,'data_files','mtype_abundance.mat'),'mTypePDF');
     load(fullfile(baseFolder,'data_files','unitarySpectrum.mat'),'psd');
     Sxx = zeros(8e3,1);
-    Sxx(1:2:end) = sum(psd.*mTypePDF',2);
-    Sxx(2:2:end) = sum(psd.*mTypePDF',2);
+    Sxx(1:2:end) = sum(psd.*mTypePDF',2); % Force to same frequency resolution as cross spectrum
+    Sxx(2:2:end) = sum(psd.*mTypePDF',2); % Force to same frequency resolution as cross spectrum
 
     % Load average cross-spectrum for different pairwise distances
     load(fullfile(baseFolder,'data_files','MC_results.mat'),'Pxy_D','count_D','dValues');
@@ -41,5 +40,5 @@ function [f,Sxx,Sxy] = compute_AP_spectra(sigx2)
     A = exp(-dValues.^2/(2*sigx2)).*dN*dV/N2;
 
     % Compute corrected average cross spectrum
-    Sxy = smooth(nansum(mu.*A,2));
+    Sxy = nansum(mu.*A,2);
 end
