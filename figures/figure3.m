@@ -38,7 +38,7 @@ function figure3
         t = log10(get(gca,'xlim'));
         t = linspace(t(1),t(end),1e3);
         FT = fitlm(asym_idx(:),(1e6)^2*(pEst(:)'),'intercept',false,'RobustOpts',true);
-        fprintf('R^2 = %f\n',FT.Rsquared.Ordinary);
+        % fprintf('R^2 = %f\n',FT.Rsquared.Ordinary);
         plot(10.^t,FT.predict(10.^t(:)),'-k')
 
         xlabel('Dendrite asymmetry index')

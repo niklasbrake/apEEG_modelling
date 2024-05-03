@@ -40,5 +40,6 @@ function [f,Sxx,Sxy] = compute_AP_spectra(sigx2)
     A = exp(-dValues.^2/(2*sigx2)).*dN*dV/N2;
 
     % Compute corrected average cross spectrum
-    Sxy = nansum(mu.*A,2);
+    % Smooth over simulation noise to better represent spectral trend
+    Sxy = smooth(nansum(mu.*A,2));
 end

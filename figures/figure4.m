@@ -191,7 +191,7 @@ function plot_cortex_schematic
     k = 1;
     while(newSub)
         newSub = false;
-        disp(['round ' int2str(k)])
+        % disp(['round ' int2str(k)])
         for i = 1:size(F0,1)
             tri = V0(F0(i,:),:);
             v_dist = exp(-vecnorm(tri,2,2).^2/sigma);

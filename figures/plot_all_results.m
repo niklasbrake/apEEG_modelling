@@ -1,4 +1,8 @@
-% Check that the data files have been downloaded
+% Set seed for reproducibility
+rng(1);
+
+%%%%%%%% Check that the data files have been downloaded %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 baseFolder = fileparts(fileparts(mfilename('fullpath')));
 
 fileCheck = true;
@@ -77,14 +81,15 @@ else
     fileCheck = false;
 end
 
-
 if(~fileCheck)
     error('Some or all data files are missing. These can be downloaded from the following link and moved to the data_files directory: https://drive.google.com/uc?export=download&id=1Ek9COzFk_wjMBEZs1V88iNplqI2bCBFh')
 else
     disp('All data files present. Proceeding to plot figures...')
 end
 
-% Run functions for all plots
+
+%%%%%%%%%%%%%%%%% Run functions for all plots %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure1; drawnow;
 figure2; drawnow;
 figure3; drawnow;
