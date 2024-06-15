@@ -1,5 +1,5 @@
 ## Preprint
-This code repository is associated with the following publication:
+This code repository is associated with the following manuscript:
 
 Brake N and Khadra A. Contributions of action potentials to scalp EEG: theory and biophysical simulations. *BioRxiv* \[**Preprint**\]. June 1, 2024. Available from: https://doi.org/10.1101/2024.05.28.596262
 
