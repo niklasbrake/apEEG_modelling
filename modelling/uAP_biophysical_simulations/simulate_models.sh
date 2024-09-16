@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --time=1:00:00
+#SBATCH --time=8:00:00
 #SBATCH --account=def-akhadra
 #SBATCH --mem=4G
 #SBATCH --mail-user=niklas.brake@mail.mcgill.ca
@@ -19,7 +19,7 @@ cd $folder
 
 # The file changedEI.txt contains the names of all the neuron models to simulation, each
 # on a seperate line
-file=/lustre04/scratch/nbrake/code/simulate_blue_brain/changedEI.txt
+file=/lustre04/scratch/nbrake/code/apEEG/changedEI.txt
 
 # Runs all simulations across the 10 cores (use --array=1-10) by skipping every 10 lines
 # of the changedEI.txt
@@ -31,7 +31,7 @@ do
   if [ $((lineNumber % 10)) -eq 0 ]; then
       cd "$d"
       nrnivmodl ./mechanisms # This can be removed after the first run
-      python /lustre04/scratch/nbrake/code/simulate_blue_brain/simulate_models.py $d
+      python /lustre04/scratch/nbrake/code/apEEG/uAP_biophysical_simulations/simulate_models.py $d
       cd ..
   fi
   ((lineNumber++))

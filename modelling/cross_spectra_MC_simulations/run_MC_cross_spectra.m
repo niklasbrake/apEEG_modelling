@@ -1,6 +1,8 @@
 function run_MC_cross_spectra
 % RUN_MC_CROSS_SPECTRA estimates the average cross-spectrum among unitary apEEG responses
 %   for neurons seperated by different pairwise distances. Called by run_MC_cross_spectra.sh.
+    rng(1)
+
 
     M = 40;
     parpool(M)
@@ -71,7 +73,10 @@ function main(chain_number)
     d_abs = 1e-4/(16e9)^2*sqrt(40);
 
     % Sample neurons proportional to abundance
-    load('/lustre04/scratch/nbrake/data/simulation_analyzed/unitaryAP/mtype_abundance.mat','mTypeCDF');
+    load('/lustre04/scratch/nbrake/data/simulation_analyzed/unitaryAP/mtype_abundance.mat','mTypePDF');
+    % Remove inhibitiory neurons from simulation
+    % mTypePDF = mTypePDF(ei_type==1);
+    mTypeCDF = cumsum(mTypePDF)/sum(mTypePDF);
     [~,idcs] = unique(mTypeCDF);
     sample_blue_neurons = @(N) interp1(mTypeCDF(idcs),idcs,rand(N,1),'next','extrap');
 

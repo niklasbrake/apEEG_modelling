@@ -6,21 +6,23 @@ function figure4
     addpath(fullfile(baseFolder,'auxiliary_functions'));
     addpath(fullfile(baseFolder,'modelling'));
 
-    plot_cortex_schematic;
-    plot_example_jitter;
+    % plot_cortex_schematic;
+    % plot_example_jitter;
+    % return;
 
     [f0,S] = import_Scheer2006;
     [f,Rxx,Rxy] = compute_AP_spectra;
 
-    N2 = 16e9; % Total neuron count
-    low_noise = (8e-3).^2;
+    N2 = 16e9*0.85; % Total neuron count
+    % low_noise = (8e-3).^2;
+    low_noise = 1e-3;
     R = 0.2;
     lam = 1;
 
     figureNB(6.9,5.7);
-        plot(f0,S,'color',0*[0.6,0.6,0.6],'Linewidth',1);
-        hold on;
+        % plot(f0,S,'color',0*[0.6,0.6,0.6],'Linewidth',1); hold on;
         plot([1,3e3],low_noise*[1,1],'color',red,'LineWidth',1.5,'LineStyle','-')
+        hold on;
 
         dS = [0,2,5,10,25,50,Inf]*1e-3;
         for i = 1:length(dS)
@@ -39,7 +41,7 @@ function figure4
         yticks([1e-6,1e-4,1e-2,1e0])
         gcaformat(gca,true,8);
 
-
+    % return;
     PN = @(A,lam,sig) lam*N2*Rxx + A*lam*N2*(N2-1)*exp(-(2*pi*f(:)*sig).^2).*Rxy;
 
     lam = 10.^linspace(-1,2,50);
@@ -113,17 +115,18 @@ function figure4
         for j = 1:length(lam)
             for k = 1:length(sig)
                 P = PN(A(i),lam(j),1e-3*sig(k));
-                M(j,k) = max(10*log10(P(f<=30)./S0(:)));
+                % M(j,k) = max(10*log10(P(f<=30)./S0(:)));
+                M(j,k) = log10(max(100*P(f<=30)./S0(:)));
             end
         end
         surf(XX,YY,0*M,M,'LineStyle','none')
         view([0,90]);
         hold on;
-        [C,h] = contour(XX,YY,M,[-20,-10,0],'color','k','linewidth',1);
+        [C,h] = contour(XX,YY,M,[0,1,2],'color','k','linewidth',1);
         if(i==4)
             fill([10,90,90,10],[0.11,0.11,4,4],'k','LineStyle','--','FaceColor','none');
         end
-        set(gca,'CLim',[-20,20])
+        set(gca,'CLim',[-2,3])
         ylim(10.^[-1,2])
         xlim(10.^[0,2])
         set(gca,'xscale','log')
@@ -141,18 +144,21 @@ function figure4
             ylabel('Firing rate (Hz)','FontSize',8)
         end
         set(gca,'FontSize',8);
-        colormap(flip(bone))
+        CM = flip(bone(1e3));
+        colormap(CM(1:800,:));
         drawnow;
     end
     C = colorbar;
     C.Position = [0.92,0.3,0.01,0.6];
-    C.Label.String = ['Rel. power (dB)'];
+    % C.Label.String = ['% PSD'];
+    C.Ticks = [-2,0,2];
+    C.TickLabels = {'0.01%','1%','100%'};
 end
 
 function plot_cortex_schematic
     fig = figure('color','w','units','centimeters');
     fig.Position(3:4) = [8.5,6];
-
+    return;
     % Get surface area of each triangle
     [sa,X] = import_leadfield;
     x0 = [54,24,35];
@@ -234,9 +240,10 @@ function plot_cortex_schematic
         'FaceLighting','gouraud','FaceVertexCData',C,'EdgeColor','none','FaceColor','interp');
         hold on
         view([120,10]);
-        axis tight equal off
         camlight headlight
         material dull
+        % axis tight;
+        axis equal off;
 
         VW = get(gca,'view');
         [a1,a2,a3] = sph2cart((VW(1)-90)*pi/180,VW(2)/180*pi,1);
@@ -253,6 +260,11 @@ function plot_cortex_schematic
         P = patch(x(1,:),x(2,:),x(3,:),'b','LineWidth',1,'FaceColor','none');
         set(ax(3),'CLim',[0,1]);
         colormap(ax(3),interp1(linspace(0,1,9),sequential_CM,linspace(0,1,100)));
+
+        xlim([-72.0256   77.1779])
+        ylim([ -106.1201   73.4775]);
+        zlim([-52.6601   81.1504]);
+
     ax(4) = axes('Position',[0.455,0.64,0.3,0.3]);
         d = vecnorm(X3.vertices,2,2);
         C = exp(-d.^2/sigma);  C = C/max(C);
@@ -333,14 +345,14 @@ function plot_example_jitter(apResponses)
         fill([c,flip(c)],[0*c,0.9*exp(-c.^2./(2*(1e3*S)^2))],[0.8,0.8,0.8],'EdgeColor','none');
         hold on;
         % plot(c,exp(-c.^2./(2*8^2)),'color','r','LineWidth',1);
-        line([0,0],[0,0.9],'color',0*[0.6,0.6,0.6],'LineWidth',1)
+        % line([0,0],[0,0.9],'color',0*[0.6,0.6,0.6],'LineWidth',1)
         del = 1e3*(s1(I1(2))-common(2));
         line([0,0]+del,[0,0.9],'color','k','LineWidth',1)
 
         fill([c,flip(c)],[1+0*c,1+0.9*exp(-c.^2./(2*(1e3*S)^2))],[0.8,0.8,0.8],'EdgeColor','none');
         hold on;
         % plot(c,1.2+exp(-c.^2./(2*8^2)),'color','r','LineWidth',1);
-        line([0,0],1+[0,0.9],'color',0*[0.6,0.6,0.6],'LineWidth',1)
+        % line([0,0],1+[0,0.9],'color',0*[0.6,0.6,0.6],'LineWidth',1)
         del = 1e3*(s2(I2(2))-common(2));
         line([0,0]+del,1+[0,0.9],'color','k','LineWidth',1)
 

@@ -1,4 +1,4 @@
-function figure5
+% function figure5
 % FIGURE5 generates the panels in figure 3 of the manuscript.
 % See also import_paralytic_data, compute_AP_spectra, fittingmodel.
 
@@ -22,7 +22,7 @@ function figure5
 
     [full_model,AP_model] = fittingmodel('eq6');
 
-    Psyn = 10.^AP_model(f,[20e-3,4e-3,-Inf,3.6])+10.^AP_model(f,[3e-3,1e-3,-Inf,3])+1e-3;
+    Psyn = 10.^AP_model(f,[20e-3,4e-3,-Inf,3.6])+10.^AP_model(f,[3e-3,1e-3,-Inf,3]);
 
     figureNB(15,7.6);
     for i = 1:length(dF)
@@ -30,10 +30,11 @@ function figure5
         plot(f0,S,'color',[0.6,0.6,0.6],'Linewidth',1);
         hold on;
         plot([1,3e3],low_noise*[1,1],'color',red,'LineWidth',0.5,'LineStyle','-')
-        plot(f,Psyn,'k','LineWidth',1)
-
+        plot(f,Psyn+1e-3,'k','LineWidth',1)
+        % plot(f,Psyn.*9,'--k','LineWidth',1)
 
             F0 = dF(i);
+            sig = 10e-3*160/F0;
             B = exp(-2*(pi*(f(:)-F0)*sig).^2);
             plot(f,lam*N2*Rxx+R*lam*N2*(N2-1)*Rxy,'color',blue*0.4+0.6,'LineWidth',1,'LineStyle',':')
 
@@ -52,12 +53,13 @@ function figure5
         ylim([1e-4,1e2])
     end
 
-    A = 10.^linspace(-4,2,50);
-    [XX,YY] = meshgrid(f,A);
+    A = 10.^linspace(-4,2,100);
+    [XX,YY] = meshgrid(f(f<1e3),A);
     P0 = zeros(length(A),length(f));
     for i = 1:length(A)
-        P0(i,:) = 10*log10((lam*N2*Rxx+A(i)*N2*(N2-1)*Rxy)./Psyn(:));
+        P0(i,:) = 10*log10((lam*N2*Rxx+A(i)*N2*(N2-1)*Rxy)./(Psyn(:)+1e-3));
     end
+    P0 = P0(:,f<1e3);
 
     figureNB(13.2,3.75);
     axes('Position',[0.10, 0.26, 0.26, 0.57])
@@ -66,9 +68,13 @@ function figure5
         ylim([-1,1]);
         axis off;
         gcaformat;
+
+
     axes('Position',[0.50, 0.3, 0.34, 0.63])
         surf(XX,YY,0*P0-1,P0,'LineStyle','none')
         view([0,90]);
+        hold on;
+        [C,h] = contour(XX,YY,P0,[0,10],'color','r','linewidth',1);
         set(gca,'xscale','log')
         set(gca,'yscale','log');
         set(gca,'CLim',[-10,20])
@@ -77,8 +83,9 @@ function figure5
         grid off
         xlabel('Oscillation peak frequency (Hz)')
         ylabel('\lambdaR_{max}')
-        ylim([1e-4,1])
-        yticks([1e-4,1e-2,1e0]);
+        ylim([1e-4,0.1])
+        yticks([1e-4,1e-3,1e-2,1e-1])
+        % yticks([1e-4,1e-2,1e0]);
         xlim([1,1e3])
         xticks([1,10,100,1000])
         xticklabels([1,10,100,1000])

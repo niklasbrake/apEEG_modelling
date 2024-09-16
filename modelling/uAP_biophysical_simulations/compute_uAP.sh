@@ -6,4 +6,4 @@
 #SBATCH --mail-type=FAIL,END
 
 module load matlab
-matlab -nodisplay -r "compute_uAP"
+matlab -batch -nojvm "compute_uAP"

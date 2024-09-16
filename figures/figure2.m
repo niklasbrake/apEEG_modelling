@@ -14,7 +14,7 @@ function figure2
     A = regress(R(:),[firingFrequency(:),ones(size(firingFrequency(:)))]);
     t = linspace(0.1,100,20);
 
-    figureNB(9,4.4);
+    figureNB(9,3.9);
     subplot(1,2,1);
         plot(firingFrequency(:),B2(:),'.k')
         line([0.1,100],[0.1,100],'color',red,'LineWidth',1)
@@ -23,8 +23,11 @@ function figure2
         set(gca,'xscale','log')
         set(gca,'yscale','log')
         xlim([1,100])
+        ylim([0.5,100])
         xticks([0.1,1,10,100])
         xticklabels([0.1,1,10,100])
+        yticks([0.1,1,10,100])
+        yticklabels([0.1,1,10,100])
         gcaformat;
     subplot(1,2,2);
         plot(firingFrequency(:),R(:),'.k')
@@ -35,6 +38,7 @@ function figure2
         ylabel('R^2')
         set(gca,'xscale','log')
         xlim([1,100])
+        ylim([0.6,1])
         xticks([0.1,1,10,100])
         xticklabels([0.1,1,10,100])
     gcaformat(gcf,true,8);

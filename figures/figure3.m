@@ -10,16 +10,19 @@ function figure3
     addpath(fullfile(baseFolder,'auxiliary_functions'));
     addpath(fullfile(baseFolder,'modelling'));
 
-    load(fullfile(baseFolder,'data_files','mtype_abundance.mat'),'mtype_abundance');
+    load(fullfile(baseFolder,'data_files','mtype_abundance.mat'),'mtype_abundance','mTypePDF');
     load(fullfile(baseFolder,'data_files','unitaryAP.mat'),'mtype','ei_type');
     load(fullfile(baseFolder,'data_files','asymmetry_indices.mat'),'asym_idx');
     load(fullfile(baseFolder,'data_files','unitarySpectrum.mat'),'psd');
 
     [f,Sxx] = compute_AP_spectra;
     f = f(2:2:end); Sxx = Sxx(2:2:end); % Frequncy resolution is upsampled to match Sxy by default
+    Sxx_I = sum(psd(:,ei_type==0).*mTypePDF(ei_type==0)',2)./sum(mTypePDF(ei_type==0));
+    Sxx_E = sum(psd(:,ei_type==1).*mTypePDF(ei_type==1)',2)./sum(mTypePDF(ei_type==1));
 
     [f0,S] = import_Scheer2006;
-    low_noise = (8e-3).^2;
+    % low_noise = (8e-3).^2;
+    low_noise = 1e-3;
     N2 = 16e9;
 
     pEst = sum(psd)*mean(diff(f));
@@ -49,7 +52,10 @@ function figure3
         set(gca,'yscale','log')
         gcaformat(gca,true,8);
     axes('Position',[0.425, 0.22, 0.23, 0.68])
-        plot(f,Sxx*(1e9)^2,'color',blue,'Linewidth',1);
+        plot(f,Sxx*(1e9)^2,'color','k','Linewidth',1);
+        hold on;
+        plot(f,Sxx_E*(1e9)^2,'color',[0.8,0.5,0.5],'Linewidth',1);
+        plot(f,Sxx_I*(1e9)^2,'color',[0.5,0.5,0.8],'Linewidth',1);
         xlim([10,1e3])
         set(gca,'xscale','log')
         xlabel('Frequency (Hz)')
@@ -59,19 +65,20 @@ function figure3
         xticklabels([1,10,100,1000]);
         gcaformat;
     axes('Position',[0.75, 0.22, 0.23, 0.68])
-        plot(f0,S,'color','k','Linewidth',1);
-        hold on;
+        % plot(f0,S,'color','k','Linewidth',1);
         plot([1,3e3],low_noise*[1,1],'color',red,'LineWidth',1.5,'LineStyle','-')
-        plot(f,0.1*N2*Sxx,'color',blue,'LineWidth',1)
-        plot(f,1*N2*Sxx,'color',blue,'LineWidth',1)
-        plot(f,10*N2*Sxx,'color',blue,'LineWidth',1)
-        plot(f,100*N2*Sxx,'color',blue,'LineWidth',1)
+        hold on;
+        plot(f,0.1*N2*Sxx,'color','k','LineWidth',1)
+        plot(f,1*N2*Sxx,'color','k','LineWidth',1)
+        plot(f,10*N2*Sxx,'color','k','LineWidth',1)
+        plot(f,100*N2*Sxx,'color','k','LineWidth',1)
         set(gca,'xscale','log')
         set(gca,'yscale','log');
         xlabel('Frequency (Hz)');
         ylabel(['PSD (' char(956) 'V^2/Hz)'])
-        ylim([1e-8,1e1])
-        yticks([1e-8,1e-4,1e0])
+        ylim([1e-9,1e-3])
+        % yticks([1e-8,1e-4,1e0])
+        yticks([1e-9,1e-6,1e-3])
         xlim([1,3e3])
         xticks([1,10,100,1000]);
         xticklabels([1,10,100,1000]);
@@ -81,6 +88,7 @@ function figure3
 
     for i = 1:length(ID)
         abundance(i) = mtype_abundance(ID{i},:).Abundance;
+        abundance2(i) = mtype_abundance(ID{i},:).Abundance./mtype_abundance(ID{i},:).count;
     end
 
     figureNB(10.4,5);
@@ -97,7 +105,7 @@ function figure3
         xax.MinorTickValues = 1:55;
         xax.MinorTick = 'on';
         xlim([0,56])
-        xlabel('Neuron morphology type index')
+        xlabel('Neuron morphology class')
         set(gca,'FontSize',8)
     axes('Position',[0.14, 0.92, 0.8, 0.05])
         [~,I] = sort(abundance,'descend');

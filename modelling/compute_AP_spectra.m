@@ -28,7 +28,9 @@ function [f,Sxx,Sxy] = compute_AP_spectra(sigx2)
     Sxx(2:2:end) = sum(psd.*mTypePDF',2); % Force to same frequency resolution as cross spectrum
 
     % Load average cross-spectrum for different pairwise distances
-    load(fullfile(baseFolder,'data_files','MC_results.mat'),'Pxy_D','count_D','dValues');
+    % load(fullfile(baseFolder,'data_files','MC_results.mat'),'Pxy_D','count_D','dValues');
+    load('E:\Research_Projects\005_Aperiodic_EEG\unitary_APs\data\simulations\cross_spectra\control_chains.mat','Pxy_D','count_D')
+    load('E:\Research_Projects\005_Aperiodic_EEG\unitary_APs\data\simulations\cross_spectra\chain1.mat','dValues')
     mu = Pxy_D./count_D;
 
     % Get density of surface area as a function of distance
@@ -41,5 +43,5 @@ function [f,Sxx,Sxy] = compute_AP_spectra(sigx2)
 
     % Compute corrected average cross spectrum
     % Smooth over simulation noise to better represent spectral trend
-    Sxy = smooth(nansum(mu.*A,2));
+    Sxy = smoothdata(nansum(mu.*A,2),'movmean',10);
 end

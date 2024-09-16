@@ -1,4 +1,4 @@
-function figure1
+% function figure1
 % FIGURE1 generates the panels in figure 1 of the manuscript.
 %
 % Data files required:
@@ -250,7 +250,7 @@ function figure1
 
     gcaformat(gcf,true,8)
 
-end
+% end
 
 function output = neglnlike(B1,X0,X1,y)
     model = X0 + B1*X1;

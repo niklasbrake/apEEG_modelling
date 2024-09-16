@@ -1,4 +1,4 @@
-function [f0,psd_Y,psd_Yhat,R,B2] = compute_scaling_with_firing_frequency
+function [f0,psd_Y,psd_Yhat,R,B2,firingFrequency] = compute_scaling_with_firing_frequency(xyz)
 % COMPUTE_SCALING_WITH_FIRING_FREQUENCY analyzes the unitary AP responses to output
 %   the file AP_scaling.mat used by figure2.
 %
@@ -8,17 +8,22 @@ function [f0,psd_Y,psd_Yhat,R,B2] = compute_scaling_with_firing_frequency
 %
 %  See also modelling\unitary_AP_response\simulations\main.sh
 
+if(nargin==0)
+    xyz = 3; % Which dimension of the single-neuron dipoles to analyze.
+end
+
     warning('off','signal:findpeaks:largeMinPeakHeight');
 
     baseFolder = fileparts(fileparts(mfilename('fullpath')));
     addpath(fullfile(baseFolder,'auxiliary_functions'));
 
-    matObj = matfile(fullfile(baseFolder,'data_files','EI_ratio.mat'));
+    % matObj = matfile(fullfile(baseFolder,'data_files','EI_ratio.mat'));
+    matObj = matfile('E:\Research_Projects\005_Aperiodic_EEG\unitary_APs\data\simulations\bAP_unitary_response\unitary_AP_EI_ratio\EI_ratio.mat');
     cellIDs = who(matObj);
 
     load(fullfile(baseFolder,'data_files','unitaryAP.mat'));
     files = cellfun(@(x)strrep(x,'-','_'),files,'UniformOutput',false);
-    getUAP = @(id) savedUnitaryAP(2:end,3,find(strcmp(id,files)));
+    getUAP = @(id) savedUnitaryAP(2:end,xyz,find(strcmp(id,files)));
 
     EI_vec = {'01','1.5','2.1','3.1','4.5','6.6','9.7','14.1','20.6','30'};
 
@@ -39,10 +44,10 @@ function [f0,psd_Y,psd_Yhat,R,B2] = compute_scaling_with_firing_frequency
         cell = matObj.(cellIDs{ii});
 
         for k = 1:length(EI_vec)
-            [f0,~,psd] = eegfft(cell.passive.time*1e-3,detrend(cell.passive.dipoles(:,3,k)),0.5,0.4);
+            [f0,~,psd] = eegfft(cell.passive.time*1e-3,detrend(cell.passive.dipoles(:,xyz,k)),0.5,0.4);
             psd_passive(:,k) = mean(psd,2);
 
-            [f0,~,psd] = eegfft(cell.active.time*1e-3,detrend(cell.active.dipoles(:,3,k)),0.5,0.4);
+            [f0,~,psd] = eegfft(cell.active.time*1e-3,detrend(cell.active.dipoles(:,xyz,k)),0.5,0.4);
             psd_active(:,k) = mean(psd,2);
 
             [y,x] = findpeaks(cell.active.voltage(:,k),'MinPeakHeight',0);
